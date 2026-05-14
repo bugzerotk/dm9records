@@ -103,6 +103,19 @@ report_mouse_t knot_c_handle_scroll(report_mouse_t mouse_report, bool is_scroll_
         int16_t delta_x = mouse_report.x;
         int16_t delta_y = -mouse_report.y; // Invert Y for natural scrolling
 
+        // if (abs(delta_y) > abs(delta_x) * 3) {
+        //     delta_x = 0;
+        //     scroll_x_remainder = 0;
+        // } else if (abs(delta_x) > abs(delta_y) * 3) {
+        //     delta_y = 0;
+        //     scroll_y_remainder = 0;
+        // }
+        if (abs(delta_x) > abs(delta_y)) {
+            delta_y = 0;
+        } else {
+            delta_x = 0;
+        }
+
         // Prevent mouse cursor from moving
         mouse_report.x = 0;
         mouse_report.y = 0;
@@ -134,17 +147,17 @@ report_mouse_t knot_c_handle_scroll(report_mouse_t mouse_report, bool is_scroll_
 
 /**
  * @brief Handle custom HID commands for configuration
- * 
+ *
  * Protocol Definition (Custom ID: 0xFC)
- * 
+ *
  * Command 0x01: Get Settings / Identify
  *   Request:  [0xFC, 0x01]
  *   Response: [0xFC, 0xFD, 'K', 'N', 'O', 'T', Version(0x01), HiresEnabled(0/1), CPI, Divisor, DisableHScroll]
- * 
+ *
  * Command 0x02: Set Settings (RAM only)
  *   Request:  [0xFC, 0x02, CPI, Divisor, DisableHScroll]
  *   Response: [0xFC, 0xFD]
- * 
+ *
  * Command 0x03: Save Settings (EEPROM)
  *   Request:  [0xFC, 0x03]
  *   Response: [0xFC, 0xFD]

@@ -10,7 +10,7 @@ enum layers { _BASE, _SCROLL = 4 };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        MO(_SCROLL), MO(_SCROLL), MS_BTN1, MS_BTN3, MS_BTN2, MS_BTN4 // 2 Touch, 4 Physical
+        MO(_SCROLL), MO(_SCROLL), MS_BTN1, MS_BTN2, MS_BTN3, MS_BTN4 // 2 Touch, 4 Physical
     ),
     [_SCROLL] = LAYOUT(
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
